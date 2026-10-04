@@ -96,7 +96,6 @@ jobs:
 
       # --- 新增的防暂停代码开始 ---
       - name: Commit time.txt to repo
-        # if: success()
         if: steps.check.outputs.should_run == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,8 +122,7 @@ jobs:
       # --- 新增的防暂停代码结束 ---
 
       - name: 上传排查截图
-        # if: always()
-        if: steps.check.outputs.should_run == 'true'
+        if: always() && steps.check.outputs.should_run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: debug-screenshots
