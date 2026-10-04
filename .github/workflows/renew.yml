@@ -23,6 +23,10 @@ jobs:
         id: check
         run: |
           START="2026-09-29"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           TODAY=$(date -u +%F)
           start_sec=$(date -d "$START" +%s)
           today_sec=$(date -d "$TODAY" +%s)
