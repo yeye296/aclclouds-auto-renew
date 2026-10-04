@@ -122,13 +122,13 @@ jobs:
           fi
       # --- 新增的防暂停代码结束 ---
 
-      # - name: 上传排查截图
-      #   # if: always()
-      #   if: steps.check.outputs.should_run == 'true'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: debug-screenshots
-      #     path: "*.png"
+      - name: 上传排查截图
+        # if: always()
+        if: steps.check.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots
+          path: "shots/*.png"
 
       # 运行记录只保留本次一条（KEEP_RUNS=0）。放在最后，避免删掉自己。
       # 需要保留排查用的历史时，把 KEEP_RUNS 调大即可。
